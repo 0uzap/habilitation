@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel administrateur
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">Liste des utilisateurs</h1>
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-8 bg-white p-4 m-0 text-primary">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr class="fw-bold text-primary">
+								<th>Nom</th>
+								<th>Prénom</th>
+								<th>Email</th>
+								<th>Rôle</th>
+								<th>Vérification</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+								<tr>
+									<td>{{ user.nom }}</td>
+									<td>{{ user.prenom }}</td>
+									<td>{{ user.email }}</td>
+									<td>
+										<form method="post" action="{{ path('gerer_roles', {'id': user.id}) }}">
+											<button type="submit">Mettre à jour</button>
+										</form>
+									</td>
+									<td>
+										{% if user.isVerified %}
+											<span class="material-icons text-success">
+												check_circle
+											</span>
+										{% else %}
+											<a href="{{ path('verifier_utilisateur', {'id': user.id, 'action': 'verify'}) }}" class="material-icons text-danger">
+												add_circle
+											</a>
+										{% endif %}
+									</td>
+									<td>
+										<form method="post" action="{{ path('supprimer_utilisateur', {'id': user.id}) }}">
+											<button type="submit" class="btn btn-danger">Supprimer</button>
+										</form>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

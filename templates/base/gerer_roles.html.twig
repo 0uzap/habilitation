@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les rôles{% endblock %}
+
+{% block body %}
+    <h1>Gérer les rôles de l'utilisateur</h1>
+    
+    <form method="post" action="{{ path('gerer_roles', {'id': user.id}) }}">
+        {{ form_start(form) }}
+        
+        {{ form_widget(form) }}
+        
+        <button type="submit">Mettre à jour</button>
+        
+        {{ form_end(form) }}
+    </form>
+    
+    <a href="{{ path('panel') }}">Retour à la liste des utilisateurs</a>
+{% endblock %}

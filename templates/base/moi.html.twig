@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil
+{% endblock %}
+
+{% block body %}
+
+	<h1>Mon Profil</h1>
+
+	<div class="user-info">
+		<p>
+			<strong>Nom:</strong>
+			{{ user.nom }}</p>
+		<p>
+			<strong>Prénom:</strong>
+			{{ user.prenom }}</p>
+		<p>
+			<strong>Email:</strong>
+			{{ user.email }}</p>
+		<p>
+			<strong>Adresse:</strong>
+			{{ user.adresse }}</p>
+		<p>
+			<strong>Ville:</strong>
+			{{ user.ville }}</p>
+		<p>
+			<strong>Code Postal:</strong>
+			{{ user.codePostal }}</p>
+		<p>
+			<strong>Rôles:</strong>
+		</p>
+		<ul>
+			{% for role in user.roles %}
+				<li>{{ role }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<h2>Modifier mon profil</h2>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+	{{ form_end(form) }}
+
+
+{% endblock %}
+
